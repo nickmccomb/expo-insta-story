@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-
-import { usePrevious } from './helpers/StateHelpers';
 import { IUserStory, StoryCircleListItemProps } from './interfaces';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
 
-import DEFAULT_AVATAR from './assets/images/no_avatar.png';
+import DEFAULT_AVATAR from './assets/images/logo.webp';
+import { usePrevious } from './helpers/StateHelpers';
 
 const StoryCircleListItem = ({
   item,
@@ -75,7 +74,7 @@ const StoryCircleListItem = ({
             avatarImageStyle,
           ]}
           source={{ uri: item.avatar_image }}
-          defaultSource={Platform.OS === 'ios' ? DEFAULT_AVATAR : null}
+          defaultSource={DEFAULT_AVATAR}
         />
       </TouchableOpacity>
       {showText && (
