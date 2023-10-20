@@ -160,6 +160,7 @@ export interface StoryListItemProps {
 }
 
 export interface StoryProps {
+  autostart: boolean;
   /** An array of IUserStory's */
   data: IUserStory[];
   /** Time in seconds */

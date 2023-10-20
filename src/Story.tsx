@@ -1,13 +1,13 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
-import { Dimensions, View, Platform, StyleSheet } from 'react-native';
-import Modal from 'react-native-modalbox';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
+import { IUserStory, NextOrPrevious, StoryProps } from './interfaces';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
-import StoryListItem from './StoryListItem';
-import StoryCircleListView from './StoryCircleListView';
-import { isNullOrWhitespace } from './helpers';
 import AndroidCubeEffect from './components/AndroidCubeEffect';
 import CubeNavigationHorizontal from './components/CubeNavigationHorizontal';
-import { IUserStory, NextOrPrevious, StoryProps } from './interfaces';
+import Modal from 'react-native-modalbox';
+import StoryCircleListView from './StoryCircleListView';
+import StoryListItem from './StoryListItem';
+import { isNullOrWhitespace } from './helpers';
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,6 +29,7 @@ export const Story = ({
   renderCloseComponent,
   renderSwipeUpComponent,
   renderTextComponent,
+  autostart,
   loadedAnimationBarStyle,
   unloadedAnimationBarStyle,
   animationBarContainerStyle,
@@ -46,6 +47,13 @@ export const Story = ({
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [selectedData, setSelectedData] = useState<IUserStory[]>([]);
   const cube = useRef<CubeNavigationHorizontal | AndroidCubeEffect>();
+
+  useEffect(() => {
+    if (!autostart) return;
+
+    _handleStoryItemPress(data[0], 0);
+
+  }, [autostart]);
 
   // Component Functions
   const _handleStoryItemPress = (item: IUserStory, index?: number) => {
@@ -174,22 +182,25 @@ export const Story = ({
 
   return (
     <Fragment>
-      <View style={style}>
-        <StoryCircleListView
-          handleStoryItemPress={_handleStoryItemPress}
-          data={dataState}
-          avatarSize={avatarSize}
-          unPressedBorderColor={unPressedBorderColor}
-          pressedBorderColor={pressedBorderColor}
-          unPressedAvatarTextColor={unPressedAvatarTextColor}
-          pressedAvatarTextColor={pressedAvatarTextColor}
-          showText={showAvatarText}
-          avatarTextStyle={avatarTextStyle}
-          avatarWrapperStyle={avatarWrapperStyle}
-          avatarImageStyle={avatarImageStyle}
-          avatarFlatListProps={avatarFlatListProps}
-        />
-      </View>
+      { !autostart && (
+        <View style={style}>
+          <StoryCircleListView
+            handleStoryItemPress={_handleStoryItemPress}
+            data={dataState}
+            avatarSize={avatarSize}
+            unPressedBorderColor={unPressedBorderColor}
+            pressedBorderColor={pressedBorderColor}
+            unPressedAvatarTextColor={unPressedAvatarTextColor}
+            pressedAvatarTextColor={pressedAvatarTextColor}
+            showText={showAvatarText}
+            avatarTextStyle={avatarTextStyle}
+            avatarWrapperStyle={avatarWrapperStyle}
+            avatarImageStyle={avatarImageStyle}
+            avatarFlatListProps={avatarFlatListProps}
+          />
+        </View>
+      )}
+      
       <Modal
         style={styles.modal}
         isOpen={isModalOpen}
