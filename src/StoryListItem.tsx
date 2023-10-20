@@ -221,6 +221,7 @@ export const StoryListItem = ({
               volume={1.0}
               muted={false}
               resizeMode={'cover'}
+              type={'m3u8'}
             />
           ) : (
             <Image
