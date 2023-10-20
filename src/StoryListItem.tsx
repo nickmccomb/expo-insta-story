@@ -216,7 +216,7 @@ export const StoryListItem = ({
                 uri: content[current].story,
               }}
               style={[styles.video, storyVideoStyle]}
-              controls={false}
+              controls={true}
             />
           ) : (
             <Image
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   video: {
-    height: Math.floor(height),
-    width: Math.floor(width),
+    aspectRatio: 1 / 2,
+    width: '100%',
   },
 });
