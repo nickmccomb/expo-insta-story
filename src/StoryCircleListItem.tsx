@@ -64,18 +64,25 @@ const StoryCircleListItem = ({
               },
         ]}
       >
-        <Image
-          style={[
-            {
-              height: avatarSize,
-              width: avatarSize,
-              borderRadius: 100,
-            },
-            avatarImageStyle,
-          ]}
-          source={{ uri: item.avatar_image }}
-          defaultSource={DEFAULT_AVATAR}
-        />
+        {item.avatar_image ? (
+          <Image
+            style={[
+              {
+                height: avatarSize,
+                width: avatarSize,
+                borderRadius: 100,
+              },
+              avatarImageStyle,
+            ]}
+            source={{ uri: item.avatar_image }}
+          />
+        ) : (
+          <Image
+            style={{ height: '56%', width: '56%', alignSelf: 'center' }}
+            resizeMode={'contain'}
+            source={DEFAULT_AVATAR}
+          />
+        )}
       </TouchableOpacity>
       {showText && (
         <Text
