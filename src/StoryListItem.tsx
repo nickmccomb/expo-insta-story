@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
 import {
-  Animated,
-  Image,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  TouchableWithoutFeedback,
   ActivityIndicator,
-  View,
+  Animated,
+  Dimensions,
+  Image,
   Platform,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import GestureRecognizer from 'react-native-swipe-gestures';
-import { Video } from 'expo-av';
-
-import { usePrevious, isNullOrWhitespace } from './helpers';
 import {
   IUserStoryItem,
   NextOrPrevious,
   StoryListItemProps,
 } from './interfaces';
+import React, { useEffect, useRef, useState } from 'react';
+import { isNullOrWhitespace, usePrevious } from './helpers';
+
+import GestureRecognizer from 'react-native-swipe-gestures';
+import Video from 'react-native-video';
 
 const { width, height } = Dimensions.get('window');
 
@@ -51,20 +51,15 @@ export const StoryListItem = ({
 }: StoryListItemProps) => {
   const [load, setLoad] = useState<boolean>(true);
   const [pressed, setPressed] = useState<boolean>(false);
+  const [current, setCurrent] = useState(0);
   const [content, setContent] = useState<IUserStoryItem[]>(
     stories.map((x) => ({
       ...x,
       finish: 0,
     })),
   );
-
-  const [current, setCurrent] = useState(0);
-
   const progress = useRef(new Animated.Value(0)).current;
-
   const prevCurrentPage = usePrevious(currentPage);
-
-  const video = useRef(null);
 
   useEffect(() => {
     let isPrevious = !!prevCurrentPage && prevCurrentPage > currentPage;
@@ -217,14 +212,11 @@ export const StoryListItem = ({
         <View style={styles.backgroundContainer}>
           {content[current]?.isVideo ? (
             <Video
-              ref={video}
-              shouldPlay
-              source={{ uri: content[current].story }}
+              source={{
+                uri: content[current].story,
+              }}
               style={[styles.video, storyVideoStyle]}
-              resizeMode="cover"
-              isLooping
-              onLoad={() => start()}
-              isMuted={currentPage !== index}
+              controls={false}
             />
           ) : (
             <Image
