@@ -1179,7 +1179,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-native-modalbox@^1.4.10":
+"@types/react-native-modalbox@^1.4.12":
   version "1.4.12"
   resolved "https://registry.yarnpkg.com/@types/react-native-modalbox/-/react-native-modalbox-1.4.12.tgz#0a979254373d6b2bf406f0bf35c89e88f4b8cae9"
   integrity sha512-G3kLG78OTL0ULIF9064/Y+g05QzLvdjO0/0v/jCVc6UKFcTG6x/KzFyFacTWmIqtHHTpBUNNQ+SETc8U/6tAuQ==
