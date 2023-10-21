@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-import DEFAULT_AVATAR from './assets/images/logo.webp';
 import { usePrevious } from './helpers/StateHelpers';
 
 const StoryCircleListItem = ({
@@ -25,6 +24,7 @@ const StoryCircleListItem = ({
   avatarImageStyle,
   avatarWrapperStyle,
 }: StoryCircleListItemProps) => {
+  const DEFAULT_AVATAR = require('./assets/images/logo.webp');
   const [isPressed, setIsPressed] = useState(item?.seen);
 
   const prevSeen = usePrevious(item?.seen);
@@ -80,7 +80,7 @@ const StoryCircleListItem = ({
           <Image
             style={{ height: '56%', width: '56%', alignSelf: 'center' }}
             resizeMode={'contain'}
-            source={DEFAULT_AVATAR}
+            source={{ uri: DEFAULT_AVATAR }}
           />
         )}
       </TouchableOpacity>

@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
-  PanResponder,
   Animated,
   Dimensions,
-  StyleSheet,
+  PanResponder,
   Platform,
+  StyleSheet,
 } from 'react-native';
+
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const { width, height } = Dimensions.get('window');
 

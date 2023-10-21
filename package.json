@@ -66,7 +66,13 @@
   "scripts": {
     "format": "prettier --write .",
     "prepare": "husky install",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --cache"
+    "types": "tsc",
+    "lint": "eslint .",
+    "pretty": "prettier '**/*.{js,jsx,ts,tsx,md,css,scss}' --check",
+    "all": "yarn check.types && yarn check.lint && yarn check.pretty && yarn test",
+    "lint.fix": "eslint . --fix",
+    "pretty.fix": "yarn check.pretty --write",
+    "all.fix": "yarn check.types && yarn fix.lint && yarn fix.pretty"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

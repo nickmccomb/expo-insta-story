@@ -1,7 +1,8 @@
+import { FlatList, StyleSheet, View } from 'react-native';
+
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
 import StoryCircleListItem from './StoryCircleListItem';
-import { StoryCircleListViewProps } from 'src/interfaces';
+import { StoryCircleListViewProps } from '../src/interfaces';
 
 const StoryCircleListView = ({
   data,
