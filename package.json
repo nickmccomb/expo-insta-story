@@ -39,7 +39,8 @@
     "prop-types": "^15.6.2",
     "react-native-modalbox": "^2.0.2",
     "react-native-swipe-gestures": "^1.0.5",
-    "react-native-video": "^6.0.0-alpha.8"
+    "react-native-video": "^6.0.0-alpha.8",
+    "epoch-timeago": "^1.1.9"
   },
   "devDependencies": {
     "@tsconfig/react-native": "^2.0.2",

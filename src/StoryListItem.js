@@ -32,8 +32,9 @@ const react_1 = __importStar(require("react"));
 const helpers_1 = require("./helpers");
 const react_native_swipe_gestures_1 = __importDefault(require("react-native-swipe-gestures"));
 const react_native_video_1 = __importDefault(require("react-native-video"));
+const epoch_timeago_1 = __importDefault(require("epoch-timeago"));
 const { width, height } = react_native_1.Dimensions.get('window');
-const StoryListItem = ({ index, key, userId, profileImage, profileName, time, duration, onFinish, onClosePress, stories, currentPage, onStorySeen, renderCloseComponent, loadedAnimationBarStyle, unloadedAnimationBarStyle, animationBarContainerStyle, storyUserContainerStyle, storyImageStyle, storyAvatarImageStyle, storyContainerStyle, storyVideoStyle, }) => {
+const StoryListItem = ({ index, key, userId, profileImage, profileName, time, duration, stories, currentPage, loadedAnimationBarStyle, unloadedAnimationBarStyle, animationBarContainerStyle, storyUserContainerStyle, storyImageStyle, storyAvatarImageStyle, storyContainerStyle, storyVideoStyle, onFinish, onClosePress, onStorySeen, renderCloseComponent, }) => {
     const [load, setLoad] = (0, react_1.useState)(true);
     const [pressed, setPressed] = (0, react_1.useState)(false);
     const [current, setCurrent] = (0, react_1.useState)(0);
@@ -163,6 +164,7 @@ const StoryListItem = ({ index, key, userId, profileImage, profileName, time, du
                 id: userId,
                 avatar_image: profileImage,
                 user_name: profileName,
+                time,
                 story: content[current],
             });
         }
@@ -198,7 +200,7 @@ const StoryListItem = ({ index, key, userId, profileImage, profileName, time, du
             <react_native_1.Image style={[styles.avatarImage, storyAvatarImageStyle]} source={{ uri: profileImage }}/>
             <react_native_1.View style={styles.flexCol}>
               <react_native_1.Text style={styles.avatarText}>{profileName}</react_native_1.Text>
-              <react_native_1.Text style={styles.timeText}>{time}</react_native_1.Text>
+              <react_native_1.Text style={styles.timeText}>{(0, epoch_timeago_1.default)(time)}</react_native_1.Text>
             </react_native_1.View>
           </react_native_1.View>
           <react_native_1.View style={styles.closeIconContainer}>

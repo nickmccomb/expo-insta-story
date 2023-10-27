@@ -36,7 +36,7 @@ const StoryCircleListView_1 = __importDefault(require("./StoryCircleListView"));
 const StoryListItem_1 = __importDefault(require("./StoryListItem"));
 const helpers_1 = require("./helpers");
 const { height, width } = react_native_1.Dimensions.get('window');
-const Story = ({ data, unPressedBorderColor, pressedBorderColor, unPressedAvatarTextColor, pressedAvatarTextColor, style, onStart, onClose, duration, swipeText, avatarSize, showAvatarText, avatarTextStyle, onStorySeen, renderCloseComponent, renderSwipeUpComponent, renderTextComponent, autostart, loadedAnimationBarStyle, unloadedAnimationBarStyle, animationBarContainerStyle, storyUserContainerStyle, storyImageStyle, storyAvatarImageStyle, storyContainerStyle, avatarImageStyle, avatarWrapperStyle, avatarFlatListProps, storyVideoStyle, }) => {
+const Story = ({ data, unPressedBorderColor, pressedBorderColor, unPressedAvatarTextColor, pressedAvatarTextColor, style, duration, avatarSize, showAvatarText, avatarTextStyle, autostart, loadedAnimationBarStyle, unloadedAnimationBarStyle, animationBarContainerStyle, storyUserContainerStyle, storyImageStyle, storyAvatarImageStyle, storyContainerStyle, avatarImageStyle, avatarWrapperStyle, avatarFlatListProps, storyVideoStyle, onStart, onClose, onStorySeen, renderCloseComponent, }) => {
     const [dataState, setDataState] = (0, react_1.useState)(data);
     const [isModalOpen, setIsModalOpen] = (0, react_1.useState)(false);
     const [currentPage, setCurrentPage] = (0, react_1.useState)(0);
@@ -105,7 +105,7 @@ const Story = ({ data, unPressedBorderColor, pressedBorderColor, unPressedAvatar
         }
     }
     const renderStoryList = () => selectedData.map((x, i) => {
-        return (<StoryListItem_1.default duration={duration * 1000} key={i} userId={x.id} profileName={x.user_name} profileImage={x.avatar_image} stories={x.stories} currentPage={currentPage} onFinish={onStoryFinish} swipeText={swipeText} renderSwipeUpComponent={renderSwipeUpComponent} renderCloseComponent={renderCloseComponent} renderTextComponent={renderTextComponent} onClosePress={() => {
+        return (<StoryListItem_1.default duration={duration * 1000} key={i} userId={x.id} profileName={x.user_name} profileImage={x.avatar_image} stories={x.stories} currentPage={currentPage} onFinish={onStoryFinish} time={x.time} renderCloseComponent={renderCloseComponent} onClosePress={() => {
                 setIsModalOpen(false);
                 if (onClose) {
                     onClose(x);
@@ -136,7 +136,7 @@ const Story = ({ data, unPressedBorderColor, pressedBorderColor, unPressedAvatar
       {!autostart && (<react_native_1.View style={style}>
           <StoryCircleListView_1.default handleStoryItemPress={_handleStoryItemPress} data={dataState} avatarSize={avatarSize} unPressedBorderColor={unPressedBorderColor} pressedBorderColor={pressedBorderColor} unPressedAvatarTextColor={unPressedAvatarTextColor} pressedAvatarTextColor={pressedAvatarTextColor} showText={showAvatarText} avatarTextStyle={avatarTextStyle} avatarWrapperStyle={avatarWrapperStyle} avatarImageStyle={avatarImageStyle} avatarFlatListProps={avatarFlatListProps}/>
         </react_native_1.View>)}
-      
+
       <react_native_modalbox_1.default style={styles.modal} isOpen={isModalOpen} onClosed={() => setIsModalOpen(false)} position="center" swipeToClose swipeArea={250} backButtonClose coverScreen={true}>
         {renderCube()}
       </react_native_modalbox_1.default>

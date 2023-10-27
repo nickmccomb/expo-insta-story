@@ -21,6 +21,7 @@ import { isNullOrWhitespace, usePrevious } from './helpers';
 
 import GestureRecognizer from 'react-native-swipe-gestures';
 import Video from 'react-native-video';
+import timeago from 'epoch-timeago';
 
 const { width, height } = Dimensions.get('window');
 
@@ -265,7 +266,7 @@ export const StoryListItem = ({
             />
             <View style={styles.flexCol}>
               <Text style={styles.avatarText}>{profileName}</Text>
-              <Text style={styles.timeText}>{time}</Text>
+              <Text style={styles.timeText}>{timeago(time)}</Text>
             </View>
           </View>
           <View style={styles.closeIconContainer}>
