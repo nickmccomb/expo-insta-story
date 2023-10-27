@@ -4,7 +4,6 @@ import {
   Dimensions,
   Image,
   Platform,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -22,6 +21,7 @@ import { isNullOrWhitespace, usePrevious } from './helpers';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import Video from 'react-native-video';
 import timeago from 'epoch-timeago';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width, height } = Dimensions.get('window');
 
@@ -40,13 +40,12 @@ export const StoryListItem = ({
   storyUserContainerStyle,
   storyImageStyle,
   storyAvatarImageStyle,
-  storyContainerStyle,
-  storyVideoStyle,
   onFinish,
   onClosePress,
   onStorySeen,
   renderCloseComponent,
 }: StoryListItemProps) => {
+  const { top } = useSafeAreaInsets();
   const [load, setLoad] = useState<boolean>(true);
   const [pressed, setPressed] = useState<boolean>(false);
   const [current, setCurrent] = useState(0);
@@ -195,37 +194,36 @@ export const StoryListItem = ({
     <GestureRecognizer
       key={key}
       config={config}
-      style={[styles.container, storyContainerStyle]}
+      style={[styles.backgroundContainer]}
     >
-      <SafeAreaView>
-        <View style={styles.backgroundContainer}>
-          {content[current]?.isVideo ? (
-            <Video
-              source={{
-                uri: content[current].story,
-              }}
-              style={[styles.video, storyVideoStyle]}
-              controls={true}
-              rate={1.0}
-              volume={1.0}
-              muted={false}
-              resizeMode={'cover'}
-              type={'m3u8'}
-            />
-          ) : (
-            <Image
-              onLoadEnd={() => start()}
-              source={{ uri: content[current].story }}
-              style={[styles.image, storyImageStyle]}
-            />
-          )}
-          {load && (
-            <View style={styles.spinnerContainer}>
-              <ActivityIndicator size="large" color={'white'} />
-            </View>
-          )}
-        </View>
-      </SafeAreaView>
+      <View style={styles.backgroundContainer}>
+        {content[current]?.isVideo ? (
+          <Video
+            source={{
+              uri: content[current].story,
+            }}
+            style={[styles.video]}
+            controls={true}
+            rate={1.0}
+            volume={1.0}
+            muted={false}
+            resizeMode={'cover'}
+            type={'m3u8'}
+          />
+        ) : (
+          <Image
+            onLoadEnd={() => start()}
+            source={{ uri: content[current].story }}
+            style={[styles.image, storyImageStyle]}
+          />
+        )}
+        {load && (
+          <View style={styles.spinnerContainer}>
+            <ActivityIndicator size="large" color={'white'} />
+          </View>
+        )}
+      </View>
+
       <View style={styles.flexCol}>
         <View
           style={[styles.animationBarContainer, animationBarContainerStyle]}
@@ -250,7 +248,7 @@ export const StoryListItem = ({
             );
           })}
         </View>
-        <View style={[styles.userContainer, storyUserContainerStyle]}>
+        <View style={[styles.userContainer, storyUserContainerStyle, { top }]}>
           <View style={styles.flexRowCenter}>
             <Image
               style={[styles.avatarImage, storyAvatarImageStyle]}
@@ -328,7 +326,6 @@ StoryListItem.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
   },
   flex: {
     flex: 1,
@@ -424,5 +421,6 @@ const styles = StyleSheet.create({
   video: {
     aspectRatio: 1 / 2,
     width: '100%',
+    height: '100%',
   },
 });
