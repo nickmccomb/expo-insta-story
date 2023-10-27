@@ -4,6 +4,7 @@ import {
   Dimensions,
   Image,
   Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,7 +22,6 @@ import { isNullOrWhitespace, usePrevious } from './helpers';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import Video from 'react-native-video';
 import timeago from 'epoch-timeago';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width, height } = Dimensions.get('window');
 
@@ -45,7 +45,6 @@ export const StoryListItem = ({
   onStorySeen,
   renderCloseComponent,
 }: StoryListItemProps) => {
-  const { top } = useSafeAreaInsets();
   const [load, setLoad] = useState<boolean>(true);
   const [pressed, setPressed] = useState<boolean>(false);
   const [current, setCurrent] = useState(0);
@@ -248,7 +247,7 @@ export const StoryListItem = ({
             );
           })}
         </View>
-        <View style={[styles.userContainer, storyUserContainerStyle, { top }]}>
+        <SafeAreaView style={[styles.userContainer, storyUserContainerStyle]}>
           <View style={styles.flexRowCenter}>
             <Image
               style={[styles.avatarImage, storyAvatarImageStyle]}
@@ -279,7 +278,7 @@ export const StoryListItem = ({
               </TouchableOpacity>
             )}
           </View>
-        </View>
+        </SafeAreaView>
         <View style={styles.pressContainer}>
           <TouchableWithoutFeedback
             onPressIn={() => progress.stopAnimation()}
