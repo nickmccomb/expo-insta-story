@@ -260,7 +260,7 @@ export const StoryListItem = ({
             />
             <View style={styles.flexCol}>
               <Text style={styles.avatarText}>{profileName}</Text>
-              <Text style={styles.timeText}>{timeago(time)}</Text>
+              <Text style={styles.timeText}>{`${timeago(time)}`}</Text>
             </View>
           </View>
           <View style={styles.closeIconContainer}>
