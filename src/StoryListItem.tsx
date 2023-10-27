@@ -30,15 +30,10 @@ export const StoryListItem = ({
   userId,
   profileImage,
   profileName,
+  time,
   duration,
-  onFinish,
-  onClosePress,
   stories,
   currentPage,
-  onStorySeen,
-  renderCloseComponent,
-  renderSwipeUpComponent,
-  renderTextComponent,
   loadedAnimationBarStyle,
   unloadedAnimationBarStyle,
   animationBarContainerStyle,
@@ -47,7 +42,10 @@ export const StoryListItem = ({
   storyAvatarImageStyle,
   storyContainerStyle,
   storyVideoStyle,
-  ...props
+  onFinish,
+  onClosePress,
+  onStorySeen,
+  renderCloseComponent,
 }: StoryListItemProps) => {
   const [load, setLoad] = useState<boolean>(true);
   const [pressed, setPressed] = useState<boolean>(false);
@@ -186,15 +184,13 @@ export const StoryListItem = ({
     }
   }
 
-  const swipeText =
-    content?.[current]?.swipeText || props.swipeText || 'Swipe Up';
-
   React.useEffect(() => {
     if (onStorySeen && currentPage === index) {
       onStorySeen({
         id: userId,
         avatar_image: profileImage,
         user_name: profileName,
+        time,
         story: content[current],
       });
     }
@@ -267,14 +263,10 @@ export const StoryListItem = ({
               style={[styles.avatarImage, storyAvatarImageStyle]}
               source={{ uri: profileImage }}
             />
-            {typeof renderTextComponent === 'function' ? (
-              renderTextComponent({
-                item: content[current],
-                profileName,
-              })
-            ) : (
+            <View style={styles.flexCol}>
               <Text style={styles.avatarText}>{profileName}</Text>
-            )}
+              <Text style={styles.timeText}>{time}</Text>
+            </View>
           </View>
           <View style={styles.closeIconContainer}>
             {typeof renderCloseComponent === 'function' ? (
@@ -328,21 +320,6 @@ export const StoryListItem = ({
           </TouchableWithoutFeedback>
         </View>
       </View>
-      {typeof renderSwipeUpComponent === 'function' ? (
-        renderSwipeUpComponent({
-          onPress: onSwipeUp,
-          item: content[current],
-        })
-      ) : (
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={onSwipeUp}
-          style={styles.swipeUpBtn}
-        >
-          <Text style={styles.swipeText}></Text>
-          <Text style={styles.swipeText}>{swipeText}</Text>
-        </TouchableOpacity>
-      )}
     </GestureRecognizer>
   );
 };
@@ -415,6 +392,10 @@ const styles = StyleSheet.create({
   },
   avatarText: {
     fontWeight: 'bold',
+    color: 'white',
+    paddingLeft: 10,
+  },
+  timeText: {
     color: 'white',
     paddingLeft: 10,
   },

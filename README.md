@@ -41,7 +41,6 @@ import ExpoInstaStory from 'expo-insta-story';
 | onClose                    | Todo when close                                     | function      |     null      |
 | onStart                    | Todo when start                                     | function      |     null      |
 | duration                   | default per story duration seconds                  | number        |      10       |
-| swipeText                  | Text of swipe component                             | string        |   Swipe Up    |
 | renderSwipeUpComponent     | Render a custom swipe up component                  | function      |               |
 | renderCloseComponent       | Render a custom close button                        | function      |               |
 | renderTextComponent        | Render custom avatar text component                 | function      |               |

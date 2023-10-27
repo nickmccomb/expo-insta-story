@@ -13,6 +13,7 @@ export interface IUserStory<T = Record<string, any>> {
   avatar_image: string | undefined;
   user_name: string;
   stories: IUserStoryItem<T>[];
+  time: number;
   /** INTERNAL USE ONLY */
   seen?: boolean;
 }
@@ -20,6 +21,7 @@ export interface IUserStory<T = Record<string, any>> {
 export interface IUserStoryItem<T = Record<string, any>> {
   story_id: number;
   story: string | undefined;
+  time: number;
   /** Function that gets called when the swipe up button is pressed */
   onPress?: (props?: any) => any;
   swipeText?: string;
@@ -115,23 +117,13 @@ export interface StoryListItemProps {
   profileImage: string | undefined;
   /** Time in seconds */
   duration: number;
-  /** Text of the swipe up button */
-  swipeText?: string;
-  /**
-   * Callback which returns a custom React Element to use as the
-   * swipeUpComponent. IUserStoryItem is passed as an arg.
-   */
-  renderSwipeUpComponent?: RenderCustomButton;
+  /** Time video was taken */
+  time: number;
   /**
    * Callback which returns a custom React Element to use as the
    * closeComponent. IUserStoryItem is passed as an arg.
    */
   renderCloseComponent?: RenderCustomButton;
-  /**
-   * Callback which returns a custom React Element to use as the textComponent.
-   * IUserStoryItem and username are passed as args.
-   */
-  renderTextComponent?: RenderCustomText;
   onFinish?: (props?: any) => any;
   onClosePress: (props?: any) => any;
   /**
@@ -186,8 +178,6 @@ export interface StoryProps {
    * every time the user swipes backwards and forwards to that screen.
    */
   onStorySeen?: (userStory: IUserSingleStory) => any;
-  /** Text of the swipe up button */
-  swipeText?: string;
   /**
    * Callback which returns a custom React Element to use as the
    * swipeUpComponent. IUserStoryItem is passed as an arg.

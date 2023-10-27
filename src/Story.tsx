@@ -18,17 +18,10 @@ export const Story = ({
   unPressedAvatarTextColor,
   pressedAvatarTextColor,
   style,
-  onStart,
-  onClose,
   duration,
-  swipeText,
   avatarSize,
   showAvatarText,
   avatarTextStyle,
-  onStorySeen,
-  renderCloseComponent,
-  renderSwipeUpComponent,
-  renderTextComponent,
   autostart,
   loadedAnimationBarStyle,
   unloadedAnimationBarStyle,
@@ -41,6 +34,10 @@ export const Story = ({
   avatarWrapperStyle,
   avatarFlatListProps,
   storyVideoStyle,
+  onStart,
+  onClose,
+  onStorySeen,
+  renderCloseComponent,
 }: StoryProps) => {
   const [dataState, setDataState] = useState<IUserStory[]>(data);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -52,7 +49,6 @@ export const Story = ({
     if (!autostart) return;
 
     _handleStoryItemPress(data[0], 0);
-
   }, [autostart]);
 
   // Component Functions
@@ -126,10 +122,8 @@ export const Story = ({
           stories={x.stories}
           currentPage={currentPage}
           onFinish={onStoryFinish}
-          swipeText={swipeText}
-          renderSwipeUpComponent={renderSwipeUpComponent}
+          time={x.time}
           renderCloseComponent={renderCloseComponent}
-          renderTextComponent={renderTextComponent}
           onClosePress={() => {
             setIsModalOpen(false);
             if (onClose) {
@@ -182,7 +176,7 @@ export const Story = ({
 
   return (
     <Fragment>
-      { !autostart && (
+      {!autostart && (
         <View style={style}>
           <StoryCircleListView
             handleStoryItemPress={_handleStoryItemPress}
@@ -200,7 +194,7 @@ export const Story = ({
           />
         </View>
       )}
-      
+
       <Modal
         style={styles.modal}
         isOpen={isModalOpen}
