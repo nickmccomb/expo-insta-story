@@ -134,10 +134,6 @@ export const StoryListItem = ({
     }
   }
 
-  function onSwipeDown(_props?: any) {
-    onClosePress();
-  }
-
   const config = {
     velocityThreshold: 0.3,
     directionalOffsetThreshold: 80,
@@ -200,8 +196,6 @@ export const StoryListItem = ({
   return (
     <GestureRecognizer
       key={key}
-      onSwipeUp={onSwipeUp}
-      onSwipeDown={onSwipeDown}
       config={config}
       style={[styles.container, storyContainerStyle]}
     >
