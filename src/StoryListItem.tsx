@@ -224,31 +224,34 @@ export const StoryListItem = ({
       </View>
 
       <View style={styles.flexCol}>
-        <View
-          style={[styles.animationBarContainer, animationBarContainerStyle]}
-        >
-          {content.map((index, key) => {
-            return (
-              <View
-                key={key}
-                style={[styles.animationBackground, unloadedAnimationBarStyle]}
-              >
-                <Animated.View
-                  style={[
-                    {
-                      flex: current == key ? progress : content[key].finish,
-                      height: 2,
-                      backgroundColor: 'white',
-                    },
-                    loadedAnimationBarStyle,
-                  ]}
-                />
-              </View>
-            );
-          })}
-        </View>
         <SafeAreaView style={[styles.userContainer, storyUserContainerStyle]}>
-          <View style={styles.flexRowCenter}>
+          <View
+            style={[styles.animationBarContainer, animationBarContainerStyle]}
+          >
+            {content.map((index, key) => {
+              return (
+                <View
+                  key={key}
+                  style={[
+                    styles.animationBackground,
+                    unloadedAnimationBarStyle,
+                  ]}
+                >
+                  <Animated.View
+                    style={[
+                      {
+                        flex: current == key ? progress : content[key].finish,
+                        height: 2,
+                        backgroundColor: 'white',
+                      },
+                      loadedAnimationBarStyle,
+                    ]}
+                  />
+                </View>
+              );
+            })}
+          </View>
+          <View style={styles.profileTop}>
             <Image
               style={[styles.avatarImage, storyAvatarImageStyle]}
               source={{ uri: profileImage }}
@@ -259,24 +262,24 @@ export const StoryListItem = ({
                 stories[current].time,
               )}`}</Text>
             </View>
-          </View>
-          <View style={styles.closeIconContainer}>
-            {typeof renderCloseComponent === 'function' ? (
-              renderCloseComponent({
-                onPress: onClosePress,
-                item: content[current],
-              })
-            ) : (
-              <TouchableOpacity
-                onPress={() => {
-                  if (onClosePress) {
-                    onClosePress();
-                  }
-                }}
-              >
-                <Text style={styles.whiteText}>X</Text>
-              </TouchableOpacity>
-            )}
+            <View style={styles.closeIconContainer}>
+              {typeof renderCloseComponent === 'function' ? (
+                renderCloseComponent({
+                  onPress: onClosePress,
+                  item: content[current],
+                })
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    if (onClosePress) {
+                      onClosePress();
+                    }
+                  }}
+                >
+                  <Text style={styles.whiteText}>X</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         </SafeAreaView>
         <View style={styles.pressContainer}>
@@ -335,10 +338,17 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: 'column',
+    flex: 1,
   },
   flexRowCenter: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  profileTop: {
+    flexDirection: 'row',
+    paddingTop: 12,
+    paddingLeft: 12,
+    paddingRight: 20,
   },
   image: {
     width: width,
@@ -354,9 +364,7 @@ const styles = StyleSheet.create({
   },
   spinnerContainer: {
     zIndex: -100,
-    position: 'absolute',
     justifyContent: 'center',
-    backgroundColor: 'black',
     alignSelf: 'center',
     width: width,
     height: height,
@@ -374,30 +382,26 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   userContainer: {
-    height: 50,
-    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
   avatarImage: {
-    height: 30,
-    width: 30,
+    height: 34,
+    width: 34,
     borderRadius: 100,
   },
   avatarText: {
     fontWeight: 'bold',
     color: 'white',
-    paddingLeft: 10,
+    paddingLeft: 6,
   },
   timeText: {
     color: 'white',
-    paddingLeft: 10,
+    paddingLeft: 6,
   },
   closeIconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50,
-    paddingHorizontal: 15,
   },
   pressContainer: {
     flex: 1,
@@ -412,6 +416,7 @@ const styles = StyleSheet.create({
   },
   whiteText: {
     color: 'white',
+    fontSize: 20,
   },
   swipeText: {
     color: 'white',
