@@ -31,7 +31,6 @@ export const StoryListItem = ({
   userId,
   profileImage,
   profileName,
-  time,
   duration,
   stories,
   currentPage,
@@ -187,7 +186,6 @@ export const StoryListItem = ({
         id: userId,
         avatar_image: profileImage,
         user_name: profileName,
-        time,
         story: content[current],
       });
     }
@@ -258,9 +256,11 @@ export const StoryListItem = ({
               style={[styles.avatarImage, storyAvatarImageStyle]}
               source={{ uri: profileImage }}
             />
-            <View style={styles.flexCol}>
+            <View style={styles.col}>
               <Text style={styles.avatarText}>{profileName}</Text>
-              <Text style={styles.timeText}>{`${timeago(time)}`}</Text>
+              <Text style={styles.timeText}>{`${timeago(
+                stories[current].time,
+              )}`}</Text>
             </View>
           </View>
           <View style={styles.closeIconContainer}>
@@ -335,6 +335,9 @@ const styles = StyleSheet.create({
   },
   flexCol: {
     flex: 1,
+    flexDirection: 'column',
+  },
+  col: {
     flexDirection: 'column',
   },
   flexRowCenter: {

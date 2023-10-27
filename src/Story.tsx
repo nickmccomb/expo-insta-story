@@ -122,7 +122,6 @@ export const Story = ({
           stories={x.stories}
           currentPage={currentPage}
           onFinish={onStoryFinish}
-          time={x.time}
           renderCloseComponent={renderCloseComponent}
           onClosePress={() => {
             setIsModalOpen(false);

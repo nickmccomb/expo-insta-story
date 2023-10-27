@@ -116,8 +116,6 @@ export interface StoryListItemProps {
   profileImage: string | undefined;
   /** Time in seconds */
   duration: number;
-  /** Time video was taken */
-  time: number;
   /**
    * Callback which returns a custom React Element to use as the
    * closeComponent. IUserStoryItem is passed as an arg.
