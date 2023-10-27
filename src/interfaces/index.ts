@@ -13,7 +13,6 @@ export interface IUserStory<T = Record<string, any>> {
   avatar_image: string | undefined;
   user_name: string;
   stories: IUserStoryItem<T>[];
-  time: number;
   /** INTERNAL USE ONLY */
   seen?: boolean;
 }
