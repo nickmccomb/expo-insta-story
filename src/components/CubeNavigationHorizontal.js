@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-// @ts-nocheck
 import React from 'react';
 
 const { width, height } = Dimensions.get('window');
