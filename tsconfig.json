@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
     "target": "ESNext",
     "module": "commonjs",
-    "allowJs": true,
     "jsx": "react-native",
     "lib": ["ES6", "DOM"],
     "checkJs": false,
