@@ -23,7 +23,6 @@ export interface IUserStoryItem<T = Record<string, any>> {
   time: number;
   /** Function that gets called when the swipe up button is pressed */
   onPress?: (props?: any) => any;
-  swipeText?: string;
   duration: number;
   isVideo?: boolean;
   /** Add your own custom props to access in the custom render methods */

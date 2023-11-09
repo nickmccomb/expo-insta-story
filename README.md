@@ -77,7 +77,6 @@ const data = [
         story_id: 1,
         story:
           'https://image.freepik.com/free-vector/universe-mobile-wallpaper-with-planets_79603-600.jpg',
-        swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
         duration: 10, //This tells the duration of each screen
       },
@@ -99,14 +98,12 @@ const data = [
         story_id: 1,
         story:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjORKvjcbMRGYPR3QIs3MofoWkD4wHzRd_eg&usqp=CAU',
-        swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
         duration: 10,
       },
       {
         story_id: 2,
         story: 'https://demo-link/123-123-123.mp4',
-        swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 2 swiped'),
         duration: 10,
         /* This indicates that this item is a video,

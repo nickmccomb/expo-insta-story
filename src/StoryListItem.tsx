@@ -418,10 +418,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
-  swipeText: {
-    color: 'white',
-    marginTop: 5,
-  },
   video: {
     aspectRatio: 1 / 2,
     width: '100%',
